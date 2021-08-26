@@ -4,6 +4,7 @@ const express = require('express'),
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('build'))
 
 const requestLogger = (req, res, next) => {
     console.log('Method:', req.method)
@@ -61,8 +62,17 @@ app.post('/api/notes', (req, res) => {
     console.log(note)
     res.json(note)
 })
+
+
+app.put('/api/notes:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    new_note = { ...note, important: !important }
+    notes = [...notes, new_note]
+    console.log(note)
+})
 app.delete('/api/notes/:id', (req, res) => {
     const id = parseInt(req.params.id)
+    note = notes.find(note => note.id == id)
     notes = notes.filter(note => note.id !== id)
 
     res.status(204).end()

@@ -45,7 +45,7 @@ app.get('/api/notes', (req, res) => {
 })
 
 app.get('/api/notes/:id', (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
     const note = notes.find(note => note.id === parseInt(id))
     if (note) {
         res.json(note)
@@ -65,15 +65,16 @@ app.post('/api/notes', (req, res) => {
 
 
 app.put('/api/notes:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    new_note = { ...note, important: !important }
-    notes = [...notes, new_note]
-    console.log(note)
+    const id = parseInt(req.params.id),
+        note = notes.find(note => note.id == id);
+
+    let new_note = { ...note, important: !important }
+    let notes = [...notes, new_note]
+    console.log(notse)
 })
 app.delete('/api/notes/:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    note = notes.find(note => note.id == id)
-    notes = notes.filter(note => note.id !== id)
+    const id = parseInt(req.params.id),
+        notes = notes.filter(note => note.id !== id);
 
     res.status(204).end()
 })
